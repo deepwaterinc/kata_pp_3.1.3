@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User page</title>
+</head>
+<body>
+  <h2>User</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Surname</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td th:text="${user.getId()}"></td>
+      <td th:text="${user.getName()}"></td>
+      <td th:text="${user.getSurname()}"></td>
+      <br>
+      <td><a th:href="@{/users/{id}/user-edit(id=${user.getId()})}">Edit</a></td>
+      <td>
+        <form th:method="delete" th:action="@{/users/{id}/user-delete(id=${user.getId()})}">
+          <input  type="submit" value="Delete">
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+</html>
