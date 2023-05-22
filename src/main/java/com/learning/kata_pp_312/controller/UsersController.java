@@ -26,6 +26,10 @@ public class UsersController {
         model.addAttribute("users", userList);
         return "users";
     }
+    @GetMapping("/admin")
+    public String admin() {;
+        return "admin";
+    }
 
     //поиск по id
     @GetMapping("/users/{id}")

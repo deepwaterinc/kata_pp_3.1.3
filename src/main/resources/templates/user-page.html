@@ -11,14 +11,16 @@
     <tr>
       <th>Id</th>
       <th>Name</th>
-      <th>Surname</th>
+      <th>Username</th>
+      <th>Password</th>
     </tr>
     </thead>
     <tbody>
     <tr>
       <td th:text="${user.getId()}"></td>
       <td th:text="${user.getName()}"></td>
-      <td th:text="${user.getSurname()}"></td>
+      <td th:text="${user.getUsername()}"></td>
+      <td th:text="${user.getPassword()}"></td>
       <br>
       <td><a th:href="@{/users/{id}/user-edit(id=${user.getId()})}">Edit</a></td>
       <td>
