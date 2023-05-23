@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>userList</title>
+  <meta charset="UTF-8">
+  <title>userList</title>
+  <style type="text/css">
+    TABLE {
+      width: 550px; /* Ширина таблицы */
+    }
+    TD, TH {
+      padding: 3px; /* Поля вокруг содержимого ячеек */
+      border-bottom: 1px solid #000; /* Линия снизу */
+    }
+    TH {
+      border-bottom: 1px solid #000; /* Линия снизу */
+    }
+    .vl {
+      border-right: 1px solid #000; /* Линия справа */
+    }
+  </style>
 </head>
 <body>
   <div th:switch="${users}">
@@ -16,24 +31,39 @@
           <th>Name</th>
           <th>Username</th>
           <th>Password</th>
+          <th>Roles</th>
+          <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user : ${users}">
-          <td th:text="${user.id}"></td>
-          <td th:text="${user.name}"></td>
-          <td th:text="${user.username}"></td>
-          <td th:text="${user.password}"></td>
-          <td><a th:href="@{/users/{id}(id=${user.id})}">View</a></td>
-          <td><a th:href="@{/admin/users/{id}/user-edit(id=${user.id})}">Edit</a></td>
+          <td class="vl" th:text="${user.id}"></td>
+          <td class="vl" th:text="${user.name}"></td>
+          <td class="vl" th:text="${user.username}"></td>
+          <td class="vl" th:text="${user.password}"></td>
+          <td class="vl" th:text="${user.roles}"></td>
+          <td>
+            <form th:action="@{/users/{id}(id=${user.id})}">
+              <input  type="submit" value="View">
+            </form>
+            <form th:action="@{/admin/users/{id}/user-edit(id=${user.id})}">
+              <input  type="submit" value="Edit">
+            </form>
+            <form th:method="delete" th:action="@{/admin/users/{id}/user-delete(id=${user.id})}">
+              <input  type="submit" value="Delete">
+            </form>
+          </td>
         </tr>
         </tbody>
       </table>
-      <a th:href="@{/admin/users/user-create}">Create new user</a>
-      <a th:href="@{/logout}">Logout</a>
-      
-<!--      <br>-->
-<!--      <a th:href="@{/admin}">Admin page</a>-->
+
+      <form th:action="@{/admin/users/user-create}">
+        <button>Create new user</button>
+      </form>
+      <form th:action="@{/logout}">
+        <button>Logout</button>
+      </form>
+
     </div>
   </div>
 </body>
