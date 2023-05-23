@@ -1,23 +1,48 @@
-package com.learning.kata_pp_312.controller;
+package com.learning.kata_pp_312.controllers;
 
-import com.learning.kata_pp_312.model.User;
-import com.learning.kata_pp_312.service.UserService;
-import com.learning.kata_pp_312.service.UserServiceImpl;
+import com.learning.kata_pp_312.entities.User;
+import com.learning.kata_pp_312.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class UsersController {
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     public UsersController(UserServiceImpl userService) {
         this.userService = userService;
     }
+
+
+
+    @GetMapping("/admin")
+    public String admin() {;
+        return "admin";
+    }
+    @GetMapping("/home")
+    public String home(Model model, Principal principal) {
+        model.addAttribute("principal", principal.getName());
+        return "home";
+    }
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
+
+
+
+
+
+
+
+
+
 
     // по дефолту открыта страница /users
     @GetMapping("/")
@@ -25,10 +50,6 @@ public class UsersController {
         List<User> userList = userService.findAll();
         model.addAttribute("users", userList);
         return "users";
-    }
-    @GetMapping("/admin")
-    public String admin() {;
-        return "admin";
     }
 
     //поиск по id
