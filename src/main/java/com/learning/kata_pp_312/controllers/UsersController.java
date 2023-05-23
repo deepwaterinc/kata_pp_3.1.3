@@ -42,7 +42,7 @@ public class UsersController {
     }
 
     //поиск по id
-    @GetMapping("/users/{id}")
+    @GetMapping("/admin/users/{id}")
     public String findUserById(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "user-page";

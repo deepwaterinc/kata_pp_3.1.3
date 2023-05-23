@@ -7,9 +7,7 @@
 <body>
 For Everyone, welcome to Home page
 <br>
-<button><a href="/login">Log in</a></button>
-<form th:action="@{/logout}">
-    <button>Logout</button>
-</form>
+<button><a th:href="@{/login}">Log in</a></button>
+<button><a th:href="@{/logout}">Logout</a></button>
 </body>
 </html>

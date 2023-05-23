@@ -42,11 +42,8 @@
     </tr>
     </tbody>
   </table>
-  <form th:action="@{/admin/users}">
-    <input type="submit" value="Users">
-  </form>
-  <form th:action="@{/logout}">
-    <button>Logout</button>
-  </form>
+  <button><a th:href="@{/admin/users}">Users</a></button>
+  <button><a th:href="@{/logout}">Logout</a></button>
+
 </body>
 </html>
