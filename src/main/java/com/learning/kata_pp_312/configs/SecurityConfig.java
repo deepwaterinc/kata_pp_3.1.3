@@ -14,9 +14,11 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity //Включаем безопасность
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserServiceImpl userService;
+    private final SuccessUserHandler successUserHandler;
     @Autowired
-    public SecurityConfig(UserServiceImpl userService) {
+    public SecurityConfig(UserServiceImpl userService, SuccessUserHandler successUserHandler) {
         this.userService = userService;
+        this.successUserHandler = successUserHandler;
     }
 
     @Override
@@ -24,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/home").authenticated()
+                .antMatchers("/home").permitAll()
                 .and()
-                .formLogin()
+                .formLogin().successHandler(successUserHandler)
                 .and()
                 .logout().logoutSuccessUrl("/home");
     }

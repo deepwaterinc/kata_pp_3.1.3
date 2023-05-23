@@ -6,7 +6,10 @@
 </head>
 <body>
 For Everyone, welcome to Home page
-<div th:text="${principal}"></div>
-<a th:href="@{/logout}">Logout</a>
+<br>
+<button><a href="/login">Log in</a></button>
+<form th:action="@{/logout}">
+    <button>Logout</button>
+</form>
 </body>
 </html>

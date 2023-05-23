@@ -19,28 +19,10 @@ public class UsersController {
         this.userService = userService;
     }
 
-
-
-    @GetMapping("/admin")
-    public String admin() {;
-        return "admin";
-    }
     @GetMapping("/home")
-    public String home(Model model, Principal principal) {
-        model.addAttribute("principal", principal.getName());
+    public String home() {
         return "home";
     }
-    @GetMapping("/user")
-    public String user() {
-        return "user";
-    }
-
-
-
-
-
-
-
 
 
 
@@ -50,6 +32,13 @@ public class UsersController {
         List<User> userList = userService.findAll();
         model.addAttribute("users", userList);
         return "users";
+    }
+
+    @GetMapping("/show-user")
+    public String userForUser(Principal principal, Model model) {
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
+        return "user-page";
     }
 
     //поиск по id
