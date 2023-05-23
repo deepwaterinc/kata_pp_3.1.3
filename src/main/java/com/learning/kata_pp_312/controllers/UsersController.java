@@ -45,7 +45,7 @@ public class UsersController {
 
 
     // по дефолту открыта страница /users
-    @GetMapping("/")
+    @GetMapping("/admin/users")
     public String findAll(Model model) {
         List<User> userList = userService.findAll();
         model.addAttribute("users", userList);
@@ -60,21 +60,21 @@ public class UsersController {
     }
 
     //Создаем объект user и направляем на страницу с формой
-    @GetMapping("/users/user-create")
+    @GetMapping("/admin/users/user-create")
     public String createUser(Model model) {
         model.addAttribute("user", new User());
         return "create-form";
     }
     //Отправляем форму в виде post-запроса с введенными полями на /users, добавляем юзера в БД и обратно направляем на /users
-    @PostMapping("/users")
+    @PostMapping("/admin/users")
     public String addUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/";
+        return "redirect:/admin/users";
     }
 
     //запрос по адресу /users/{id}/user-edit. Читаем id и записываем в модель юзера с подходящим id.
     //направляем patch запрос на адрес /users/{id}.
-    @GetMapping("/users/{id}/user-edit")
+    @GetMapping("/admin/users/{id}/user-edit")
     public String editUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "edit-form";
@@ -82,15 +82,15 @@ public class UsersController {
     //получаем patch запрос(который отфильтровался с помощью registerHiddenFieldFilter() в AppInit)
     //создаем объект User и записываем в него из patch запроса данные.
     //обновляем юзера из БД
-    @PatchMapping("/users/{id}")
+    @PatchMapping("/admin/users/{id}")
     public String updateUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
-        return "redirect:/";
+        return "redirect:/admin/users";
     }
 
-    @DeleteMapping("users/{id}/user-delete")
+    @DeleteMapping("/admin/users/{id}/user-delete")
     public String deleteUser(@PathVariable("id") int id ) {
         userService.deleteUser(id);
-        return "redirect:/";
+        return "redirect:/admin/users";
     }
 }

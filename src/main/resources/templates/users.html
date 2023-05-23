@@ -25,13 +25,15 @@
           <td th:text="${user.username}"></td>
           <td th:text="${user.password}"></td>
           <td><a th:href="@{/users/{id}(id=${user.id})}">View</a></td>
-          <td><a th:href="@{/users/{id}/user-edit(id=${user.id})}">Edit</a></td>
+          <td><a th:href="@{/admin/users/{id}/user-edit(id=${user.id})}">Edit</a></td>
         </tr>
         </tbody>
       </table>
-      <a th:href="@{/users/user-create}">Create new user</a>
-      <br>
-      <a th:href="@{/admin}">Admin page</a>
+      <a th:href="@{/admin/users/user-create}">Create new user</a>
+      <a th:href="@{/logout}">Logout</a>
+      
+<!--      <br>-->
+<!--      <a th:href="@{/admin}">Admin page</a>-->
     </div>
   </div>
 </body>

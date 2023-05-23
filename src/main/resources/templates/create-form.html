@@ -5,7 +5,7 @@
     <title>Create user form</title>
 </head>
 <body>
-    <form th:method="post" th:action="@{/users}" th:object="${user}">
+    <form th:method="post" th:action="@{/admin/users}" th:object="${user}">
         <label for="name">Name</label>
         <input type="text" id="name" th:field="*{name}">
         <br>
@@ -15,7 +15,9 @@
         <label for="password">Password</label>
         <input type="text" id="password" th:field="*{password}">
         <br>
-
+        <label for="roles">Roles</label>
+        <input type="text" id="roles" th:field="*{roles}">
+        <br>
         <input type="submit" value="Add user">
     </form>
 </body>
